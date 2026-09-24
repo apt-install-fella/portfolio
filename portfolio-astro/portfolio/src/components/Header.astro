@@ -1,0 +1,87 @@
+---
+const links = [
+  { href: "#about", label: "à-propos" },
+  { href: "#skills", label: "stack" },
+  { href: "#parcours", label: "parcours" },
+  { href: "#projects", label: "projets" },
+  { href: "#contact", label: "contact" },
+];
+---
+
+<header>
+  <div><span class="prompt">~$</span> fella.bennounas</div>
+  <nav>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <button id="theme-toggle" type="button" aria-label="Changer de thème (clair / sombre)">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const root = document.documentElement;
+
+  function isLight() {
+    return root.getAttribute("data-theme") === "light";
+  }
+
+  toggle?.addEventListener("click", () => {
+    const next = isLight() ? "dark" : "light";
+    root.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+</script>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 6vw;
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    border-bottom: 1px solid var(--rule);
+  }
+  .prompt {
+    color: var(--accent);
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  nav a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: 22px;
+  }
+  nav a:hover,
+  nav a:focus-visible {
+    color: var(--ink);
+  }
+  #theme-toggle {
+    margin-left: 22px;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    color: var(--grey);
+    font-size: 0.9rem;
+    line-height: 1;
+    padding: 5px 9px;
+    cursor: pointer;
+  }
+  #theme-toggle:hover,
+  #theme-toggle:focus-visible {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+  @media (max-width: 680px) {
+    nav a {
+      margin-left: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+interface Props {
+  emoji: string;
+  tag: string;
+  title: string;
+  description: string;
+  stack: string[];
+  repoUrl?: string;
+  demoUrl?: string;
+}
+
+const { emoji, tag, title, description, stack, repoUrl, demoUrl } = Astro.props;
+---
+
+<article class="card">
+  <div class="thumb" aria-hidden="true">{emoji}</div>
+  <div class="card-body">
+    <p class="tag">{tag}</p>
+    <h3>{title}</h3>
+    <p class="desc">{description}</p>
+    <ul class="stack">
+      {stack.map((item) => <li>{item}</li>)}
+    </ul>
+    <div class="links">
+      {repoUrl && (
+        <a href={repoUrl} target="_blank" rel="noopener">→ dépôt du projet</a>
+      )}
+      {demoUrl && (
+        <a href={demoUrl} target="_blank" rel="noopener">→ voir en ligne</a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    overflow: hidden;
+    margin-bottom: 26px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 0, 149, 0.15);
+  }
+  .card:last-child {
+    margin-bottom: 0;
+  }
+  .thumb {
+    background: radial-gradient(circle at 30% 30%, rgba(255, 85, 210, 0.25), transparent 60%), var(--bg);
+    border-right: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+  }
+  .card-body {
+    padding: 28px 30px;
+  }
+  .tag {
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin: 0 0 10px;
+  }
+  h3 {
+    font-family: Georgia, serif;
+    font-size: 1.4rem;
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+  .desc {
+    color: var(--grey);
+    font-size: 0.88rem;
+    margin: 0 0 16px;
+    max-width: 54ch;
+  }
+  .stack {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+  }
+  .stack li {
+    font-size: 0.72rem;
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 4px 9px;
+  }
+  .links a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-right: 18px;
+  }
+  .links a:hover,
+  .links a:focus-visible {
+    text-decoration: underline;
+  }
+  @media (max-width: 680px) {
+    .card {
+      grid-template-columns: 1fr;
+    }
+    .thumb {
+      height: 120px;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+</style>

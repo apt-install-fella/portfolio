@@ -1,0 +1,250 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects.js";
+
+const skills = [
+  { k: "langages", v: "C · Java · TypeScript · SQL" },
+  { k: "data", v: "Oracle · SQL avancé" },
+  { k: "outils", v: "Git · Godot · Docker" },
+  { k: "méthode", v: "Agile / Scrum · gestion de projet" },
+];
+
+const timeline = [
+  { hash: "◈ 2024", msg: "baccalauréat"},
+  { hash: "◈ 2024-2025", msg: "BUT 1ere année: Découverte du developpement informatique", date: "Exploration des differents aspects de la programmation" },
+  { hash: "◈ 2025-2026", msg: "BUT 2eme année: Stage long", date: "Fini" },
+  { hash: "◈ 2026-2027", msg: "BUT 3eme année: En alternance", date: "En cours" },
+];
+---
+
+<Layout
+  title="Fella Bennounas — Portfolio"
+  description="Étudiante en BUT Informatique, développement, à la recherche d'une première expérience professionnelle orientée data."
+>
+  <Header />
+
+  <div class="cote">
+    <div class="hero">
+      <h1>
+        Développeuse en formation, <span class="accent">curieuse de data</span>,
+        prête pour le terrain.
+      </h1>
+      <p class="tagline">
+        Étudiante en BUT Informatique (parcours développement), 3ᵉ année. À la
+        recherche d'une première expérience professionnelle pour mettre mes
+        compétences à l'épreuve du réel.
+      </p>
+    </div>
+    <img src="https://img.magnific.com/free-photo/computer-program-coding-screen_53876-138060.jpg?semt=ais_hybrid&w=740&q=80" alt="programming stuff" width="600" height="400"   style="border-radius: 20px;"/>
+  </div>
+
+
+
+<section id="about">
+  <p class="comment">A propos de moi</p>
+
+  <div class="cote">
+    <p class="about-text">
+      Je veux intégrer rapidement le monde professionnel : tester mes
+      compétences, découvrir une autre vision de l'informatique, et enfin
+      observer le fruit concret de mes efforts. Le <span class="accent">T4</span>
+      a été mon premier vrai projet long terme, avec des camarades que je ne
+      connaissais pas encore bien — j'y ai appris le déroulement réel d'un
+      projet, les erreurs de gestion à éviter, et Godot de A à Z.
+    </p>
+
+    <div>
+      <svg width="30" height="30" fill="none" aria-hidden="true">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <text x="12" y="18" font-size="7" font-weight="700" text-anchor="middle" fill="currentColor">PDF</text>
+      </svg>
+      <a
+        href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/cv-fella-bennounas.pdf`}
+        download
+        class="cv-link"
+      >
+
+        ↓ Télécharger mon CV
+      </a>
+    </div>
+  </div>
+</section>
+
+  <section id="skills">
+    <p class="comment">Aquis</p>
+    <div class="skills-grid">
+      {skills.map((s) => (
+        <div class="skill-group">
+          <p class="k">{s.k}</p>
+          <p class="v">{s.v}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="parcours">
+    <p class="comment">Parcours</p>
+    <div class="log">
+      {timeline.map((c) => (
+        <div class="commit">
+          <p class="hash">{c.hash}</p>
+          <div>
+            <p class="msg">{c.msg}</p>
+            <p class="date">{c.date}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="comment">Projets</p>
+    {projects.map((p) => <ProjectCard {...p} />)}
+  </section>
+
+  <section id="contact">
+    <p class="comment">Contactez moi</p>
+    <div class="contact-box">
+      <p class="contact-line"><span class="k">email</span> fellabennounas@gmail.com</p>
+      <p class="contact-line"><span class="k">github</span> https://github.com/apt-install-fella</p>
+      <p class="contact-line"><span class="k">linkedin</span> https://www.linkedin.com/in/fella-b-57982b399/</p>
+      <p class="contact-line">
+        <span class="k">ville</span>
+        <span class="accent">Strasbourg 67000</span>
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hero {
+    padding: 11vh 6vw 8vh;
+    max-width: 820px;
+  }
+  .cote {
+    display: flex;
+    flex-direction: row;   
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;     
+    justify-content: space-between;
+  }
+  .path {
+    color: var(--grey);
+    font-size: 0.85rem;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(2.1rem, 5.4vw, 3.5rem);
+    line-height: 1.25;
+    margin: 0 0 24px;
+  }
+  .tagline {
+    color: var(--grey);
+    max-width: 58ch;
+    font-size: 0.95rem;
+  }
+  .about-text {
+    font-size: 0.95rem;
+    max-width: 62ch;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+    max-width: 920px;
+  }
+  .skill-group .k {
+    color: var(--accent);
+    font-size: 0.78rem;
+    margin: 0 0 8px;
+  }
+  .skill-group .v {
+    font-size: 0.88rem;
+    margin: 0;
+  }
+
+  .log {
+    max-width: 760px;
+  }
+  .commit {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 20px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .commit:last-child {
+    border-bottom: none;
+  }
+  .commit .hash {
+    color: var(--accent);
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  .commit .msg {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .commit .date {
+    color: var(--grey);
+    font-size: 0.75rem;
+    margin: 4px 0 0;
+  }
+
+  .contact-box {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 32px;
+    max-width: 640px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .contact-box:hover,
+  .contact-box:focus-within {
+    box-shadow: 0 8px 24px rgba(255, 0, 149, 0.15);
+  }
+
+  .contact-line {
+    display: flex;
+    gap: 14px;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    margin: 0;
+  }
+  .contact-line .k {
+    color: var(--accent);
+    min-width: 110px;
+  }
+
+  .cv-link {
+    margin-top: 20px;
+    padding: 10px 18px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  .cv-link:hover,
+  .cv-link:focus-visible {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  @media (max-width: 680px) {
+    .commit {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

@@ -1,0 +1,15 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>{year} · Fella Bennounas</footer>
+
+<style>
+  footer {
+    padding: 5vh 6vw;
+    color: var(--grey);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--rule);
+    padding-bottom: calc(5vh + env(safe-area-inset-bottom, 0px));
+  }
+</style>

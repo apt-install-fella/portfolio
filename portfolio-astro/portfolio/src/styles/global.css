@@ -1,0 +1,66 @@
+:root {
+  --bg: #12141a;
+  --panel: #181b23;
+  --ink: #e4e6ec;
+  --grey: #7a8092;
+  --accent: #ff9cce;
+  --rule: #262a35;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root[data-theme="light"] {
+  --bg: #fff0f9;
+  --panel: #ffe7f5;
+  --ink: #171a21;
+  --grey: #5b6272;
+  --accent: #c00a59;
+  --rule: #e1e3e8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: "SFMono-Regular", "Menlo", ui-monospace, monospace;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+}
+
+svg {
+  color: var(--accent);
+  margin-top: 5rem;
+}
+
+img {
+  box-shadow: 0 8px 24px rgba(185, 95, 134, 0.5);
+  margin-right: 20px;
+}
+
+section {
+  padding: 8vh 6vw;
+  border-top: 1px solid var(--rule);
+}
+
+.comment {
+  color: var(--accent);
+  font-size: 2rem;
+  margin-bottom: 22px;
+  font-weight: bold;
+  font-family: Georgia, serif;
+}
+
+.accent {
+  color: var(--accent);
+}
